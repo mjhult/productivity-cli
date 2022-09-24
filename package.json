@@ -5,7 +5,8 @@
   "main": "bin/src/index.js",
   "bin": {
     "google": "bin/src/index.js",
-    "youtube": "bin/src/index.js"
+    "youtube": "bin/src/index.js",
+    "github": "bin/src/index.js"
   },
   "scripts": {
     "build": "tsc && chmod u+x ./bin/src/index.js",
