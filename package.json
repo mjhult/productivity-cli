@@ -8,7 +8,9 @@
     "youtube": "bin/src/index.js"
   },
   "scripts": {
-    "build": "tsc && chmod u+x ./bin/src/index.js"
+    "build": "tsc && chmod u+x ./bin/src/index.js",
+    "build:dev": "yarn build && yarn install:local",
+    "install:local": "sudo npm i -g ."
   },
   "author": "wvaviator",
   "license": "MIT",
