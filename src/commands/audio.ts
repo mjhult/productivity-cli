@@ -6,6 +6,9 @@ import {
   setDefaultInputDevice,
 } from 'macos-audio-devices';
 
+/**
+ * Prompt the user to select an audio device for output and input.
+ */
 export const selectAudio = async () => {
   const [outputDevices, inputDevices] = await Promise.all([
     getOutputDevices(),
