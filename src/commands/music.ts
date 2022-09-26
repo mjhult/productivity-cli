@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import navigate from '../utils/navigate';
+import { refocusWindow } from '../utils/window';
 
 const YOUTUBE_MUSIC_URL = 'https://music.youtube.com/';
 
@@ -55,5 +56,7 @@ export const playMusic = async (args: string[]) => {
   let url = `${YOUTUBE_MUSIC_URL}${href}`;
 
   await browser.close();
+  const refocus = await refocusWindow();
   navigate(url);
+  refocus();
 };
