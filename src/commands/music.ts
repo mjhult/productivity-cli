@@ -4,6 +4,10 @@ import navigate from '../utils/navigate';
 const YOUTUBE_MUSIC_URL = 'https://music.youtube.com/';
 
 export const playMusic = async (args: string[]) => {
+  if (args.length === 0) {
+    return navigate(YOUTUBE_MUSIC_URL);
+  }
+
   const searchQuery = args.join('+');
   const browser = await puppeteer.launch({
     headless: true,
@@ -49,13 +53,6 @@ export const playMusic = async (args: string[]) => {
     }
   );
   let url = `${YOUTUBE_MUSIC_URL}${href}`;
-
-  //This code checks if the URL is a valid URL. If it is, it will open a new browser window at that URL. Otherwise the new browser window will open to the search page.
-  await page.goto(url, { waitUntil: 'networkidle2' });
-
-  if (page.url() !== url) {
-    url = searchUrl;
-  }
 
   await browser.close();
   navigate(url);
