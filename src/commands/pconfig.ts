@@ -52,7 +52,20 @@ export const pConfig = async (args: string[]): Promise<void> => {
      * Displays help.
      */
     help: function (): void {
-      console.log('Display help here.');
+
+      // Slower but easier to understand and add to.
+      const helpString: string[] = [
+        'Command usage: pconfig <option>',
+        'Example: pconfig set githubHandle WVAviator',
+        'Options:',
+        'set <config item> <value> -> Sets config item\'s value.',
+        'get <config item?> -> Gets the config item\'s value or entire config.',
+        'reset <config item?> -> Resets the config item\'s value or entire config.',
+        'help -> This screen.'
+      ]
+
+      helpString.forEach(item => console.log(item));
+      // console.log('Display help here.');
     }
   }
 
