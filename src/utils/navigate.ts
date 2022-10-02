@@ -1,8 +1,8 @@
 import { exec } from 'child_process';
-import Config from '../../cli-config.json';
+import { ConfigUtils } from './config';
 
 const navigate = (url: string) => {
-  const commandString = `open "${Config.browserPath}" ${url}`;
+  const commandString = `open ${ConfigUtils.getConfig().browserPath || ''} ${url}`;
 
   exec(commandString, (error, stdout, stderr) => {
     if (error) console.log(error);

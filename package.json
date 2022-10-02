@@ -4,15 +4,17 @@
   "description": "A collection of CLI commands to improve productivity",
   "main": "bin/src/index.js",
   "bin": {
-    "google": "bin/src/index.js",
-    "youtube": "bin/src/index.js",
-    "github": "bin/src/index.js",
-    "audio": "bin/src/index.js",
-    "music": "bin/src/index.js"
+    "google": "bin/index.js",
+    "youtube": "bin/index.js",
+    "github": "bin/index.js",
+    "audio": "bin/index.js",
+    "music": "bin/index.js",
+    "pconfig": "bin/index.js"
   },
   "scripts": {
-    "build": "tsc && chmod u+x ./bin/src/index.js",
+    "build": "tsc && chmod u+x ./bin/index.js",
     "build:dev": "yarn build && yarn install:local",
+    "build:install": "npm run build && npm run install:local",
     "install:local": "sudo npm i -g ."
   },
   "author": "wvaviator",
