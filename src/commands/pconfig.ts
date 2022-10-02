@@ -43,9 +43,7 @@ export const pConfig = async (args: string[]): Promise<void> => {
     reset: function (options?: string[]): void {
       const key: string = options[0] || '';
       ConfigUtils.reset(key);
-      // console.log(`Command: reset\n`, key);
       console.log(key ? `Reset key: ${key}.` : `Reset config.`);
-      // console.log(ConfigUtils.getConfig());
     },
 
     /**
@@ -65,7 +63,6 @@ export const pConfig = async (args: string[]): Promise<void> => {
       ]
 
       helpString.forEach(item => console.log(item));
-      // console.log('Display help here.');
     }
   }
 
