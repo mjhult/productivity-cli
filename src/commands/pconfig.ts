@@ -1,29 +1,64 @@
 import { ConfigUtils } from '../utils/config';
 
-export const pConfig = async (args: string[]) => {
+export const pConfig = async (args: string[]): Promise<void> => {
+  
+  // Current config
+  const config = ConfigUtils.getConfig();
 
-  // Get which action is wanted.
-  switch (args[0].toLowerCase()) {
+  // Available commands
+  const commands = {
 
-    case 'set':
-      console.log(`Command: set\n`, args);
-      break;
+    /**
+     * Sets a config item.
+     * 
+     * @param options Key/value from user
+     */
+    set: function (options: string[]): void {
+      const key: string = options[0];
+      const value: string = options[1] || '';
 
-    case 'reset':
-      console.log(`Command: reset\n`, args);
-      break;
+      if (key === undefined) return this.help();
+      if (!(key in config)) return console.log('Config item invalid.');
 
-    case 'config':
-      console.log(ConfigUtils.getConfig());
-      break;
+      ConfigUtils.save(key, value);
 
-    case 'test':
-      console.log(ConfigUtils.getConfig().test);
-      break;
+      console.log(`Saved config item: ${key} : ${value}`);
+    },
 
-    default:
+    /**
+     * Displays the current config item value or entire config if no key is specified.
+     * 
+     * @param options Key from user.
+     */
+    get: function (options?: string[]): void {
+      const key: string = options[0] || '';
+      console.log(key in config ? `${key} : ${config[key]}` : config);
+    },
+
+    /**
+     * Resets a key specified by user or entire config if no key specified.
+     * 
+     * @param options Key to reset.
+     */
+    reset: function (options?: string[]): void {
+      const key: string = options[0] || '';
+      ConfigUtils.reset(key);
+      // console.log(`Command: reset\n`, key);
+      console.log(key ? `Reset key: ${key}.` : `Reset config.`);
+      // console.log(ConfigUtils.getConfig());
+    },
+
+    /**
+     * Displays help.
+     */
+    help: function (): void {
       console.log('Display help here.');
-      break;
+    }
   }
 
+  // Does the command exist?
+  if (!args[0] || !(args[0] in commands)) return commands['help']();
+
+  // Command does exist!
+  commands[args[0]](args.slice(1));
 }
